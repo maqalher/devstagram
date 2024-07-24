@@ -159,3 +159,11 @@ Livewire
             @livewireScripts
 
 https://domcloud.co/
+
+https://blogjc.vercel.app/post/easy-deploy-php-laravel
+
+publicar livew 
+
+ manage => 
+    cd ~/public_html
+    php artisan liverwire:publish 
