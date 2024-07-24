@@ -1,0 +1,161 @@
+crear proyecto
+    composer create-project laravel/laravel devstagram
+
+views/layouts/app.blade.php
+
+
+tailwind 
+    npm install -D tailwindcss postcss autoprefixer
+    npx tailwindcss init -p
+
+        en tailwind.config.js agregar
+            content: [
+                "./resources/**/*.blade.php",
+                "./resources/**/*.js",
+            ],
+
+    en resources/css/app.css
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+    *npm run dev
+
+    en app.blade
+        @vite('resources/css/app.css')
+        @vite('resources/js/app.js')
+
+
+resources/auth/register.blade.php
+
+controlador register
+    php artisan make:controller RegisterController
+    php artisan make:controller Auth\\RegisterController crea el controlador en la carpata Auth
+
+una forma de tradicir al español
+    git clone https://github.com/MarcoGomesr/laravel-validation-en-espanol.git
+
+    resources/lang  copy es
+
+    config/app.php
+        'locale' => 'es',
+
+
+validaciones Available Validation Rules
+
+migracion usuarios
+    php artisan migrate
+
+    php artisan make:migration add_username_to_users_table 
+        php artisan migrate
+
+crear PostController
+    php artisan make:controller PostController
+    php artisan make:controller LoginController
+    php artisan make:controller LogoutController
+
+views/dashboard.blade.php
+views/auth/login.blade.php
+
+iconos 
+    https://heroicons.com/
+
+views/posts/create.blade.php
+
+Dorpzone
+    https://www.dropzone.dev/
+
+    npm install --save dropzone
+
+
+php artisan make:controller ImagenController
+
+intervention
+    https://image.intervention.io/v2
+
+    composer require intervention/image ** se uso esta
+    composer require intervention/image:^2
+
+    en config/app.php agregar
+        Intervention\Image\ImageServiceProvider::class   // 198 aprox  - providers
+        'Image' => Intervention\Image\Facades\Image::class //215 aprox - aliases
+ 
+    ****
+        si al subir imagnes no se agrega, crear carpeta uploads en public
+
+Crear Modelo Post
+
+    php artisan make:model --migration --factory Post
+
+    php artisan tinker
+        $ususario = User::find(3);
+
+        App\Models\Post::factory() o Post::factory()
+
+        Post::factory()->times(30)->create();
+        revertir php artisan migrate:rollback --step=1 (elimina tabla post)
+
+agregar estilos tailwind a la paginacion, agregar en tailwind.config.js    
+    "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+
+cambiar texto en la paginacion
+    C:\Users\thinkpad\Desktop\Laravel\Laravel9-jp\devstagram\vendor\laravel\framework\src\Illuminate\Pagination\resources\views\tailwind.blade.php
+
+
+views/posts/show.blade.php
+
+Controlador Comentario
+php artisan make:model --migration --controller Comentario
+    // Tabla pivote
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        $table->foreignId('post_id')->constrained()->onDelete('cascade');
+        $table->string('comentario');
+
+    php artisan migrate
+
+
+Crear policy
+    php artisan make:policy PostPolicy --model=Post
+
+
+Like controller
+    php artisan make:model --migration --controller Like
+
+PerfilContoroller
+    php artisan make:controller PerfilController
+
+views/perfil/index.blade.php
+
+php artisan make:migration add_imagen_field_to_users_table
+    php artisan migrate
+
+php artisan make:model Follower -mc
+    php artisan migrate
+
+php artisan make:controller HomeController
+
+views/home.blade.php
+
+Componentes Laravel
+    php artisan make:component ListarPost
+
+    limpiar vistas
+         php artisan view:clear
+
+Livewire
+    Validacion de Formulario
+    Subida de Archivos
+    paginacionRedireccionar
+    Mensajes Flash
+    Autorizacion
+    Eventos
+
+    composer require livewire/livewire
+
+        php artisan make:livewire like-post
+
+        agregar en app.blade
+            @livewireStyles
+            @livewireScripts
+
+https://domcloud.co/
